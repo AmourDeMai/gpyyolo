@@ -1,0 +1,6 @@
+classes= 1
+train  = /disk1/yonghui/trcv/pyyolo/darknet/tr_data/train.txt
+valid  = /disk1/yonghui/trcv/pyyolo/darknet/tr_data/test.txt
+names = cfg/gpyyolo.names
+backup = backup
+
