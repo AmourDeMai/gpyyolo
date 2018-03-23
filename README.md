@@ -34,9 +34,8 @@ Delete line 170 in module.c, then follow pyyolo README.md
 ```
 cd gpyyolo
 cp conf.json.tmpl conf.json
-cp ../cfg/* ../pyyolo/darknet/cfg
 ```
-make sure that model weight file is in dir: pyyolo/
+make sure that model weight file is in dir: gpyyolo/
 
 
 ## RUN
@@ -45,3 +44,29 @@ make sure that model weight file is in dir: pyyolo/
 cd gpyyolo
 python gpyyolo.py -task inference
 ```
+
+### TRAIN
+label images:  [tool link](https://github.com/tzutalin/labelImg)
+
+generate labels:
+
+```
+cd gpyyolo
+python data_label.py  # update its class name, data path etc. before running
+```
+
+compile darknet framework (***todo***: auto compile)
+
+```
+cd pyyolo/darknet
+make
+```
+
+before running, pls check cfg params.
+run:
+
+```
+cd gpyyolo
+python gpyyolo.py -task train
+```
+

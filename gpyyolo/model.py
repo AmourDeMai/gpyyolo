@@ -22,8 +22,10 @@ class Model(object):
 
     def _init_model(self):
         LOG.info('init general python yolo model')
-        pyyolo.init(self.params['darknet_path'], self.params['datacfg'],
-                    self.params['cfgfile'], self.params['weightfile'])
+        pyyolo.init(self.params['darknet_path'],
+                    os.path.join('../', self.params['datacfg']),
+                    os.path.join('../', self.params['cfgfile']),
+                    self.params['weightfile'])
 
     @staticmethod
     def _init_frame():
@@ -51,8 +53,12 @@ class Model(object):
                 (detect['right'], detect['bottom']), (0, 0, 255), 1)
 
     def train(self):
-        # TODO
-        pass
+        # TODO: add more options: gpu support and transfer training
+        cmd = os.path.join(self.params['darknet_path'], 'darknet')
+        params = ' '.join(['detector', 'train', self.params['datacfg'],
+                          self.params['cfgfile']])
+        os.system(' '.join([cmd, params]))
+
 
     def _inference_image(self, image):
         frame = image.transpose(2, 0, 1)
@@ -90,6 +96,6 @@ class Model(object):
 
 if __name__ == '__main__':
     model = Model()
-    # model.train()
-    model.inference()
+    model.train()
+    # model.inference()
 
